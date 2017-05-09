@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Reddit Gallery</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="reddit.min.js"></script>
+    </head>
+    <body ng-app="gallery">
+        <div class="container" ng-controller="mainController">
+            <form>
+                <div class="jumbotron">
+                    <h2 class="text-info">Reddit Gallery</h2>
+                    <div>
+                        <input type="text" class="form-control" placeholder="Enter subreddit" ng-model="sub">
+                        <h5 class="text-info">your request {{sub}}</h5>
+                    </div>
+                    <input type="button" value="previous" ng-disabled="disprev" class="btn btn-info" ng-click="previous()">
+                    <input type="button" value="submit" ng-disabled="dissubmit" 
+                    class="btn btn-success" 
+                    ng-click="search()">
+                    <input type="button" value="reset" class="btn btn-danger"
+                    ng-click="reset()">
+                    <input type="button" value="next" ng-disabled="disnxt" 
+                    class="btn btn-info"
+                    ng-click="nextfunction()">
+                </div>
+            </form>
+            <div>
+                <div class="row">
+                    <div class="col-md-4" ng-repeat="image in images">
+                        <div class="thumbnail">
+                            <a ng-href="{{'https://www.reddit.com' + image.permalink}}" target="_blank"><img ng-src="{{image.url}}" title="{{image.title}}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-info" ng-show="related">
+                <div class="panel-heading">sorry your subreddit not found,
+                related subreddits: </div>
+                <div class="panel-body" ng-repeat="option in options">
+                {{option}}
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+        <script src="controller.js"></script>
+    </body>
+</html>
